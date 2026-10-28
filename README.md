@@ -79,6 +79,24 @@ The client detects a v5 snapshot, converts freehand `draw` shapes to v1 points, 
 - `src/canvas-model.js` — format-neutral analysis and the dependency-free PNG preview renderer.
 - `client.js` — generated bundle.
 
+## Similar DSH plugins
+
+There are several community drawing/canvas plugins; the closest ones differ in
+editor, storage, and agent surface:
+
+| Project | Editor | Where it lives | Persistence | Agent tools |
+|---|---|---|---|---|
+| [johappel/dsh-tldraw](https://github.com/johappel/dsh-tldraw) (package `dsh-whiteboard`) | tldraw 5 | right sidebar tab | workspace-level snapshot store | 9 whiteboard tools |
+| [zhang-guo-wen/dsh-whiteboard](https://github.com/zhang-guo-wen/dsh-whiteboard) | draw.io | main gallery + sidebar editor | plugin `files/` directory | editor-oriented |
+| [Jegozhou/dsh-excalidraw](https://github.com/Jegozhou/dsh-excalidraw) | Excalidraw 0.18 | main panel | `DSH_HOME/excalidraw/drawings` | 5 typed scene tools |
+| [CSlawyer1985/dsh-excalidraw-board](https://github.com/CSlawyer1985/dsh-excalidraw-board) | excalidraw.com iframe | floating overlay | upstream site | none local |
+| [lb-aigc/dsh-canvas](https://github.com/lb-aigc/dsh-canvas) | React Flow node canvas | right sidebar + conversation | session projection | 5 node tools |
+
+`dsh-tldraw-canvas` is intentionally different: it uses the **MIT tldraw v1**
+editor, stores **one file per Session inside that Session's cwd**, and exposes a
+**read-only summary + PNG preview** tool rather than a collaborative editing
+toolset.
+
 ## Naming
 
 Public DSH plugins follow a small set of repository/package conventions:
