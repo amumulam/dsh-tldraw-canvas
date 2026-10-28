@@ -4,7 +4,7 @@
 
 [![test](https://github.com/amumulam/dsh-tldraw-canvas/actions/workflows/test.yml/badge.svg)](https://github.com/amumulam/dsh-tldraw-canvas/actions/workflows/test.yml)
 
-一个 DeepSeek Harness 插件：为每个 Session 在右侧栏提供独立的 tldraw 画板。本版本使用**原始 MIT 开源版 tldraw v1**（2021–2022），而不是商业授权的 tldraw 5 SDK，因此不需要 License Key，没有水印，也没有生产环境限制。
+一个 **DeepSeek Harness Desktop** 插件：为每个 Session 在右侧栏提供独立的 tldraw 画板。本版本使用**原始 MIT 开源版 tldraw v1**（2021–2022），而不是商业授权的 tldraw 5 SDK，因此不需要 License Key，没有水印，也没有生产环境限制。
 
 画板会自动保存到该 Session 的**项目目录**（Workspace 所归属的目录），因此它跟随工作区，而不是保存在浏览器存储里。
 
