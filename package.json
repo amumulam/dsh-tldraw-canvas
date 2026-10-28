@@ -1,0 +1,70 @@
+{
+  "name": "dsh-tldraw-canvas",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A per-Session tldraw v1 (MIT) canvas in the DeepSeek Harness right sidebar, saved inside the Session working directory, with an agent-readable summary/preview tool.",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "src",
+    "build.mjs",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.10",
+    "@tldraw/tldraw": "1.29.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-theme"
+      ]
+    }
+  },
+  "license": "MIT",
+  "author": "amumulam",
+  "homepage": "https://github.com/amumulam/dsh-tldraw-canvas",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amumulam/dsh-tldraw-canvas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amumulam/dsh-tldraw-canvas/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "tldraw",
+    "canvas",
+    "whiteboard",
+    "mit"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

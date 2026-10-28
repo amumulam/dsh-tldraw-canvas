@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Tldraw Canvas">
+  <rect x="5" y="9" width="54" height="46" rx="10" fill="#f6f0e4"/>
+  <rect x="5" y="9" width="54" height="46" rx="10" fill="none" stroke="#2b2926" stroke-width="3"/>
+  <path d="M16 37c4-9 8-14 12-13 4 1 2 12 7 13 3 .7 6-3 9-7" fill="none" stroke="#e0573d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="44" cy="43" r="4" fill="#2d6cdf"/>
+  <path d="M12 20h20" stroke="#2b2926" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+</svg>

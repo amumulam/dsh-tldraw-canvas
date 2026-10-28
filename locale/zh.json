@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "画板",
+    "description": "在右侧面板为每个 Session 打开一块 MIT 开源版 tldraw v1 画布，画布自动保存到该 Session 的工作目录；Agent 可通过 tldraw_read_canvas 读取摘要和预览。"
+  }
+}
