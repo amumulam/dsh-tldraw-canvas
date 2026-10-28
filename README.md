@@ -120,19 +120,6 @@ editor, stores **one file per Session inside that Session's project directory**,
 **read-only summary + PNG preview** tool rather than a collaborative editing
 toolset.
 
-## Naming
-
-Public DSH plugins follow a small set of repository/package conventions:
-
-- `dsh-<capability>` — the most common, e.g. `dsh-context`, `dsh-better-sidebar`
-- `dsh-plugin-<capability>` — e.g. `dsh-plugin-subscriptions`
-- `@author/dsh-<capability>` — when the package is scoped to its author
-
-This project follows the first form: repository `dsh-tldraw-canvas`, package
-`dsh-tldraw-canvas`, tab implementation id `dsh-tldraw-canvas/canvas`. The
-package keywords use `dsh`, `dsh-plugin`, and `deepseek-harness` so plugin
-directories can discover it.
-
 ## Why tldraw v1
 
 The current tldraw 5 SDK is source-available but requires a commercial/trial/hobby license key in production. The original tldraw v1 is MIT, but it is no longer maintained (last release 1.29.2, 2022). This plugin intentionally trades modern features and maintenance for a genuinely open-source editor.

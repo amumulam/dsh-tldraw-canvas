@@ -99,16 +99,6 @@ Host 自己解析 Session 的项目目录，浏览器不能指定任意路径。
 
 `dsh-tldraw-canvas` 的定位不同：它使用 **MIT tldraw v1** 编辑器，**每个 Session 在项目目录内保存一个文件**，并提供**只读摘要 + PNG 预览**工具，而不是协作编辑工具集。
 
-## 命名
-
-公开的 DSH 插件大致遵循几种命名方式：
-
-- `dsh-<capability>` — 最常见，例如 `dsh-context`、`dsh-better-sidebar`
-- `dsh-plugin-<capability>` — 例如 `dsh-plugin-subscriptions`
-- `@author/dsh-<capability>` — 当包按作者 scope 命名时
-
-本项目采用第一种：仓库 `dsh-tldraw-canvas`，包名 `dsh-tldraw-canvas`，标签页实现 id `dsh-tldraw-canvas/canvas`。关键词使用 `dsh`、`dsh-plugin` 和 `deepseek-harness`，方便插件目录检索。
-
 ## 为什么使用 tldraw v1
 
 当前 tldraw 5 SDK 源码可见，但在生产环境需要商业/试用/Hobby License Key。原始 tldraw v1 是 MIT，但已停止维护（最后一个版本 1.29.2，2022 年）。本插件有意用现代功能和维护支持换取一个真正开源的编辑器。
