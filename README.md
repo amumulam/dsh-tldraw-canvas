@@ -1,5 +1,7 @@
 # dsh-tldraw-canvas
 
+**English** | [中文](README.zh.md)
+
 [![test](https://github.com/amumulam/dsh-tldraw-canvas/actions/workflows/test.yml/badge.svg)](https://github.com/amumulam/dsh-tldraw-canvas/actions/workflows/test.yml)
 
 A DeepSeek Harness plugin that gives every Session its own tldraw canvas in the right sidebar. This build uses the original **MIT-licensed tldraw v1** (2021–2022) instead of the commercially licensed tldraw 5 SDK, so there is no license key, no watermark, and no production gate.
