@@ -25,9 +25,13 @@ class CanvasError extends Error {
 }
 
 /**
- * Find the directory this Session currently works in. A live Session owns the
- * authoritative value through `workingDirectory`; an archived one still has an
- * immutable `cwd` in its persisted header.
+ * Resolve the Session's project directory. A Workspace is a named directory
+ * plus a Session grouping, not an artifact bucket, and DSH records a
+ * Session's project origin in its immutable `SessionHeader.cwd`. The effective
+ * working directory may move later through `working_directory`; the canvas
+ * deliberately stays anchored to the project origin so a `cd` cannot split one
+ * Session's drawings across directories, and archived Sessions read the same
+ * place as live ones.
  *
  * @param {import('@deepseek-ai/cordis').Context} ctx - plugin context.
  * @param {string} sessionId - the Session named by the browser.
@@ -36,8 +40,11 @@ class CanvasError extends Error {
 async function resolveCwd(ctx, sessionId) {
   const session = ctx.sessions.get(sessionId);
   if (session !== undefined) {
+    if (typeof session.header.cwd === 'string' && session.header.cwd !== '') {
+      return session.header.cwd;
+    }
     const workingDirectory = ctx.get('workingDirectory');
-    return workingDirectory?.get(session) ?? session.header.cwd;
+    return workingDirectory?.get(session);
   }
   const persistence = ctx.get('sessionPersistence');
   if (persistence === undefined) return undefined;

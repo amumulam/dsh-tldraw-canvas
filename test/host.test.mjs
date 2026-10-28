@@ -12,6 +12,7 @@ const OTHER_SESSION = 'session-test-0002';
 function makeHarness(cwd, options = {}) {
   const live = options.live !== false;
   const withWebApp = options.withWebApp !== false;
+  const currentCwd = options.currentCwd ?? cwd;
   let handler;
   let registeredTool;
   const provided = {};
@@ -31,7 +32,7 @@ function makeHarness(cwd, options = {}) {
       get: (id) => (live && id === SESSION ? { id, header: { cwd } } : undefined),
     },
     get: (name) => {
-      if (name === 'workingDirectory') return { get: () => cwd };
+      if (name === 'workingDirectory') return { get: () => currentCwd };
       if (name === 'sessionPersistence') {
         return {
           stat: async (id) =>
@@ -222,6 +223,36 @@ test('exposes a reusable read service and the tldraw_read_canvas tool', async (t
   assert.equal(blocks[0].type, 'text');
   assert.equal(blocks[1].type, 'image');
   assert.equal(blocks[1].attachment.attachmentId, 'attachment-1');
+});
+
+test('anchors a live Session canvas to its project origin, not a later cd', async (t) => {
+  const origin = await mkdtemp(path.join(tmpdir(), 'dsh-tldraw-origin-'));
+  const moved = await mkdtemp(path.join(tmpdir(), 'dsh-tldraw-moved-'));
+  t.after(() => rm(origin, { recursive: true, force: true }));
+  t.after(() => rm(moved, { recursive: true, force: true }));
+  const harness = makeHarness(origin, { currentCwd: moved });
+  t.after(harness.dispose);
+
+  const document = {
+    id: 'doc',
+    name: 'Page 1',
+    version: 15.5,
+    pages: { page: { id: 'page', name: 'Page 1', childIndex: 1, shapes: {}, bindings: {} } },
+    pageStates: { page: { id: 'page', selectedIds: [], camera: { point: [0, 0], zoom: 1 } } },
+    assets: {},
+  };
+  const saved = await harness.call(
+    'PUT',
+    `/api/tldraw?sessionId=${SESSION}`,
+    JSON.stringify({ sessionId: SESSION, snapshot: document }),
+  );
+  assert.equal(saved.statusCode, 200);
+  assert.equal((await readJson(saved)).relativePath, `.dsh/tldraw/${SESSION}.json`);
+
+  const originFile = path.join(origin, '.dsh', 'tldraw', `${SESSION}.json`);
+  const movedFile = path.join(moved, '.dsh', 'tldraw', `${SESSION}.json`);
+  assert.equal(JSON.parse(await readFile(originFile, 'utf8')).format, 'tldraw-v1');
+  await assert.rejects(readFile(movedFile, 'utf8'), { code: 'ENOENT' });
 });
 
 test('falls back to the persisted header for a session that is not live', async (t) => {

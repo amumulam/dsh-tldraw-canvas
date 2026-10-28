@@ -2,7 +2,7 @@
   "name": "dsh-tldraw-canvas",
   "version": "1.0.0",
   "type": "module",
-  "description": "A per-Session tldraw v1 (MIT) canvas in the DeepSeek Harness right sidebar, saved inside the Session working directory, with an agent-readable summary/preview tool.",
+  "description": "A per-Session tldraw v1 (MIT) canvas in the DeepSeek Harness right sidebar, saved inside the Session project directory (the Workspace directory), with an agent-readable summary/preview tool.",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",

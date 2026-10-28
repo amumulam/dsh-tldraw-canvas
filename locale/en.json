@@ -1,6 +1,6 @@
 {
   "meta": {
     "title": "Tldraw Canvas",
-    "description": "Opens an MIT-licensed tldraw v1 canvas in the right sidebar for each Session, saves it inside that Session working directory, and exposes a tldraw_read_canvas tool for summaries and previews."
+    "description": "Opens an MIT-licensed tldraw v1 canvas in the right sidebar for each Session, saves it in that Session project directory (the Workspace directory), and exposes a tldraw_read_canvas tool for summaries and previews."
   }
 }

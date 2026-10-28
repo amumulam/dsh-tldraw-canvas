@@ -4,7 +4,7 @@
 
 A DeepSeek Harness plugin that gives every Session its own tldraw canvas in the right sidebar. This build uses the original **MIT-licensed tldraw v1** (2021–2022) instead of the commercially licensed tldraw 5 SDK, so there is no license key, no watermark, and no production gate.
 
-The canvas autosaves into that Session's working directory, so it travels with the workspace instead of living in browser storage.
+The canvas autosaves into the Session's **project directory** — the directory the Workspace groups the Session under — so it travels with the workspace instead of living in browser storage.
 
 ## Install
 
@@ -53,13 +53,34 @@ const { analysis, png } = await ctx.tldrawCanvas.render(sessionId);
 `inspect` and `render` are read-only; `configure`/write access stays with the
 canvas tab and its autosave.
 
+## Workspace vs Session cwd
+
+DSH's **Workspace** is a registry entry: a named directory plus the Sessions
+grouped under the directory they were created in. It is not an artifact bucket,
+and removing a Workspace never deletes its folder, files, or Session history.
+
+A Session has two directory notions:
+
+- **Project origin** — immutable `SessionHeader.cwd`. Workspace grouping and
+  archived-Session reads are keyed from this path.
+- **Effective working directory** — may move later through the
+  `working_directory` tool. Agent tools write there, while existing shells keep
+  their own process-local directories.
+
+The canvas is anchored to the **project origin**, not the transient effective
+cwd. That way a `cd` inside one Session cannot split its drawings across
+directories, and a live Session and its archived replay read the same file. Use
+a separate Session in another directory for a separate canvas.
+
 ## Where it saves
 
 ```text
-<session cwd>/.dsh/tldraw/<session-id>.json
+<session project directory>/.dsh/tldraw/<session-id>.json
 ```
 
-The Host resolves the Session's current working directory itself, so the browser cannot choose an arbitrary path. Each canvas is written atomically and survives app restarts and Session switching.
+The Host resolves the Session's project directory itself, so the browser cannot
+choose an arbitrary path. Each canvas is written atomically and survives app
+restarts and Session switching.
 
 ### Legacy v5 drawings
 
@@ -93,7 +114,7 @@ editor, storage, and agent surface:
 | [lb-aigc/dsh-canvas](https://github.com/lb-aigc/dsh-canvas) | React Flow node canvas | right sidebar + conversation | session projection | 5 node tools |
 
 `dsh-tldraw-canvas` is intentionally different: it uses the **MIT tldraw v1**
-editor, stores **one file per Session inside that Session's cwd**, and exposes a
+editor, stores **one file per Session inside that Session's project directory**, and exposes a
 **read-only summary + PNG preview** tool rather than a collaborative editing
 toolset.
 
