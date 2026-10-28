@@ -112,3 +112,9 @@ node --test test/*.test.mjs
 ```
 
 The tests cover the Host API's read/write contract, invalid and concurrent requests, malformed files, temporary-file cleanup, legacy v5 backup, v5 paint-point decoding, v5 → v1 conversion, the reusable read service, and the agent tool's summary/image envelope.
+
+## Disclaimer
+
+This is an independent community plugin. tldraw is a trademark of tldraw Inc.;
+this project is not affiliated with or endorsed by tldraw Inc. The bundled
+tldraw v1 code remains under its MIT license (see `THIRD_PARTY_NOTICES.md`).
